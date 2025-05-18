@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dental Management System - DentaCare</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-gray-800 font-sans">
+
+  <!-- Header -->
+  <header class="bg-white shadow-md fixed w-full z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-blue-600">Sample logo</h1>
+      <nav class="space-x-6">
+        <a href="index.html" class="hover:text-blue-500">Home</a>
+        <a href="services.html" class="hover:text-blue-500">Services</a>
+        <a href="about.html" class="hover:text-blue-500">About Us</a>
+        <a href="#contact" class="hover:text-blue-500">Contact</a>
+        <button onclick="openAuthModal()" class="border border-blue-600 text-blue-600 px-4 py-1 rounded hover:bg-blue-50">Create an Account</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="pt-28 bg-gradient-to-r from-blue-100 to-white px-4">
+    <div class="max-w-7xl mx-auto text-center py-16">
+      <h2 class="text-4xl font-bold text-blue-700">Your Trusted Partner in Dental Care Management</h2>
+      <p class="mt-4 text-lg">Streamline your clinic's operations with our all-in-one dental management system.</p>
+      <div class="mt-6 space-x-4">
+        <button onclick="document.getElementById('appointmentModal').classList.remove('hidden')" class="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700">Book an Appointment</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us -->
+  <section class="py-16 bg-gray-100 px-4">
+    <div class="max-w-7xl mx-auto text-center">
+      <h3 class="text-3xl font-semibold">Why Choose Us?</h3>
+      <div class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <div class="p-4">
+          <span class="text-5xl text-blue-500 select-none">📅</span>
+          <h4 class="font-bold mt-2">Easy Scheduling</h4>
+        </div>
+        <div class="p-4">
+          <span class="text-5xl text-blue-500 select-none">📋</span>
+          <h4 class="font-bold mt-2">Reliable Records</h4>
+        </div>
+        <div class="p-4">
+          <span class="text-5xl text-blue-500 select-none">💳</span>
+          <h4 class="font-bold mt-2">Secure Billing</h4>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact & Location -->
+  <section id="contact" class="py-16 bg-white px-4 scroll-mt-20">
+    <div class="max-w-7xl mx-auto">
+      <h3 class="text-3xl font-semibold text-center mb-8">Contact & Location</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div class="space-y-4 text-lg">
+          <p><strong>Phone:</strong> (123) 456-7890</p>
+          <p><strong>Email:</strong> contact@dentacare.com</p>
+          <p><strong>Hours:</strong> Mon - Fri: 8am - 6pm</p>
+        </div>
+        <div>
+          <iframe
+            src="https://maps.google.com/maps?q=dental%20clinic&t=&z=13&ie=UTF8&iwloc=&output=embed"
+            width="100%" height="250" class="rounded shadow" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-6 text-center">
+    <div class="space-x-4 mb-2">
+      <a href="#" class="hover:underline">Privacy Policy</a>
+      <a href="#" class="hover:underline">Terms of Service</a>
+    </div>
+    <div class="space-x-4">
+      <a href="#" class="hover:text-blue-400">Facebook</a>
+      <a href="#" class="hover:text-blue-400">Twitter</a>
+      <a href="#" class="hover:text-blue-400">LinkedIn</a>
+    </div>
+    <p class="mt-2 text-sm">&copy; 2025 DentaCare. All rights reserved.</p>
+  </footer>
+
+  <!-- Modals -->
+  <!-- Auth Modal (Login & Signup) -->
+  <div id="authModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm">
+      <h2 id="authTitle" class="text-xl font-bold mb-4 text-center">Login</h2>
+      <input id="authUsername" type="text" placeholder="Username" class="w-full mb-3 px-4 py-2 border rounded" />
+      <div class="relative mb-3">
+        <input id="authPassword" type="password" placeholder="Password" class="w-full px-4 py-2 border rounded pr-10" />
+        <button type="button" onclick="togglePassword('authPassword', this)" class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500">
+          👁️
+        </button>
+      </div>
+      <div class="text-right text-sm mb-4">
+        <a href="#" class="text-blue-600 hover:underline">Forgot password?</a>
+      </div>
+      <button onclick="login()" class="bg-blue-600 text-white w-full py-2 rounded hover:bg-blue-700 mb-3">Login</button>
+
+      <!-- Signup fields hidden initially -->
+      <div id="signupFields" class="hidden">
+        <input id="signupFullname" type="text" placeholder="Full Name" class="w-full mb-3 px-4 py-2 border rounded" />
+        <input id="signupUsername" type="text" placeholder="Username" class="w-full mb-3 px-4 py-2 border rounded" />
+        <div class="relative mb-3">
+          <input id="signupPassword" type="password" placeholder="Password" class="w-full px-4 py-2 border rounded pr-10" />
+          <button type="button" onclick="togglePassword('signupPassword', this)" class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500">
+            👁️
+          </button>
+        </div>
+        <button class="bg-blue-600 text-white w-full py-2 rounded hover:bg-blue-700 mb-3">Register</button>
+      </div>
+
+      <div class="text-center text-sm">
+        <button id="toggleAuthBtn" onclick="toggleAuth()" class="text-blue-600 hover:underline">Create an Account</button>
+      </div>
+      <button onclick="closeAuthModal()" class="text-gray-600 mt-3 hover:underline w-full">Cancel</button>
+    </div>
+  </div>
+
+  <!-- Appointment Modal -->
+  <div id="appointmentModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+      <h2 class="text-xl font-bold mb-4 text-center">Book an Appointment</h2>
+      <label for="date" class="block mb-2 font-medium">Select a Date</label>
+      <input type="date" id="date" class="w-full mb-2 px-4 py-2 border rounded" />
+      <label for="time" class="block mb-2 font-medium">Available Time Slots</label>
+      <select id="time" class="w-full mb-2 px-4 py-2 border rounded">
+        <option>9:00 AM</option>
+        <option>10:00 AM</option>
+        <option>11:00 AM</option>
+        <option>2:00 PM</option>
+        <option>3:00 PM</option>
+        <option>4:00 PM</option>
+      </select>
+      <p id="slotsInfo" class="mb-4 text-center text-blue-600 font-semibold"></p>
+      <button id="confirmAppointmentBtn" class="bg-blue-600 text-white w-full py-2 rounded hover:bg-blue-700">Confirm Appointment</button>
+
+      <button onclick="document.getElementById('appointmentModal').classList.add('hidden')" class="text-gray-600 mt-3 hover:underline w-full">Cancel</button>
+    </div>
+  </div>
+
+<script>
+  function openAuthModal() {
+    document.getElementById('authModal').classList.remove('hidden');
+    showLogin();
+  }
+  function closeAuthModal() {
+    document.getElementById('authModal').classList.add('hidden');
+  }
+  function toggleAuth() {
+    const loginBtn = document.querySelector('#authModal > div > button[onclick="login()"]');
+    const signupFields = document.getElementById('signupFields');
+    const authTitle = document.getElementById('authTitle');
+    const toggleBtn = document.getElementById('toggleAuthBtn');
+
+    if (signupFields.classList.contains('hidden')) {
+      signupFields.classList.remove('hidden');
+      loginBtn.style.display = 'none';
+      authTitle.textContent = 'Sign Up';
+      toggleBtn.textContent = 'Login Instead';
+    } else {
+      signupFields.classList.add('hidden');
+      loginBtn.style.display = 'block';
+      authTitle.textContent = 'Login';
+      toggleBtn.textContent = 'Create an Account';
+    }
+  }
+
+  function togglePassword(inputId, button) {
+    const input = document.getElementById(inputId);
+    if (input.type === "password") {
+      input.type = "text";
+      button.textContent = "🙈";
+    } else {
+      input.type = "password";
+      button.textContent = "👁";
+}
+}
+
+function login() {
+alert('This is a dummy login function.');
+}
+
+// Appointment modal logic
+
+const dateInput = document.getElementById('date');
+const slotsInfo = document.getElementById('slotsInfo');
+
+// Disable past dates in date input
+const today = new Date().toISOString().split('T')[0];
+dateInput.min = today;
+
+// Dummy slots available per date (can be fetched from server)
+const slotsPerDate = {
+// YYYY-MM-DD: number of slots available
+// Some example dates for demo; in real, dynamic
+[today]: 5,
+// next days
+[new Date(Date.now() + 86400000).toISOString().split('T')[0]]: 3,
+[new Date(Date.now() + 2 * 86400000).toISOString().split('T')[0]]: 0,
+};
+
+// Show slots info when date changes
+dateInput.addEventListener('input', () => {
+const selectedDate = dateInput.value;
+if (!selectedDate) {
+slotsInfo.textContent = '';
+return;
+}
+const slots = slotsPerDate[selectedDate];
+if (slots === undefined) {
+slotsInfo.textContent = 'Slots available: Unknown';
+} else if (slots === 0) {
+slotsInfo.textContent = 'No slots available on this date';
+document.getElementById('time').disabled = true;
+} else {
+slotsInfo.textContent = `Slots available: ${slots}`;
+document.getElementById('time').disabled = false;
+}
+});
+
+// Reset slots info and enable time select on modal open
+document.getElementById('appointmentModal').addEventListener('transitionstart', () => {
+slotsInfo.textContent = '';
+document.getElementById('time').disabled = false;
+});
+
+document.getElementById('confirmAppointmentBtn').addEventListener('click', () => {
+  // Close appointment modal
+  document.getElementById('appointmentModal').classList.add('hidden');
+  // Open auth modal (login/signup)
+  openAuthModal();
+});
+</script>
+
+</body> </html>

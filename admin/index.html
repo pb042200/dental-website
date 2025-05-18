@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dental Admin Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background: #F0F9FF; /* light blue background */
+    }
+
+    .content-wrapper {
+      display: flex;
+      flex: 1;
+    }
+
+    .sidebar {
+      width: 220px;
+      background-color: #1E293B; /* dark blue-gray */
+      color: #BFDBFE; /* light blue text */
+      padding: 20px 0;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .sidebar h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #3B82F6; /* blue-500 */
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    .sidebar ul {
+      list-style: none;
+    }
+
+    .sidebar ul li {
+      padding: 15px 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      color: #BFDBFE; /* light blue */
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .sidebar ul li:hover {
+      background-color: #334155; /* slightly lighter blue-gray */
+      color: #60A5FA; /* brighter blue on hover */
+    }
+
+    .sidebar ul li i {
+      margin-right: 10px;
+      color: #60A5FA;
+    }
+
+    .logout {
+      padding: 15px 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      color: #F87171; /* red-400 */
+      transition: background-color 0.3s ease, color 0.3s ease;
+      margin-top: auto;
+      border-top: 1px solid #334155;
+    }
+
+    .logout:hover {
+      background-color: #B91C1C; /* red-700 */
+      color: #FECACA; /* red-200 */
+    }
+
+    .logout i {
+      margin-right: 10px;
+      color: #F87171;
+    }
+
+    .main-content {
+      flex-grow: 1;
+      padding: 20px;
+      background: white;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    header h1 {
+      font-size: 24px;
+      color: #2563EB; /* blue-600 */
+      font-weight: 700;
+    }
+
+    .admin-name {
+      font-size: 16px;
+      color: #4B5563; /* gray-600 */
+      font-weight: 500;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.15); /* subtle blue shadow */
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(37, 99, 235, 0.3);
+    }
+
+    .card i {
+      font-size: 28px;
+      margin-bottom: 10px;
+      color: #2563EB; /* blue-600 */
+    }
+
+    .card h3 {
+      margin: 10px 0 5px;
+      font-size: 18px;
+      color: #1E293B; /* dark blue-gray */
+      font-weight: 600;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: #4B5563; /* gray-600 */
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    footer {
+      background-color: #1E293B; /* dark blue-gray */
+      color: white;
+      text-align: center;
+      padding: 10px 0;
+      font-weight: 500;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="content-wrapper">
+    <div class="sidebar">
+      <div>
+        <h2>DENTAL CARE</h2>
+        <ul>
+          <li onclick="showPage('dashboard')"><i class="fas fa-home"></i> Dashboard</li>
+          <li onclick="showPage('appointments')"><i class="fas fa-calendar-check"></i> Appointments</li>
+          <li onclick="showPage('users')"><i class="fas fa-users"></i> User Management</li>
+          <li onclick="showPage('inventory')"><i class="fas fa-boxes"></i> Inventory</li>
+          <li onclick="showPage('billing')"><i class="fas fa-file-invoice-dollar"></i> Billing</li>
+          <li onclick="showPage('reports')"><i class="fas fa-chart-line"></i> Reports</li>
+          <li onclick="showPage('settings')"><i class="fas fa-cog"></i> Settings</li>
+        </ul>
+      </div>
+      <div class="logout" onclick="logout()">
+        <i class="fas fa-power-off"></i> Logout
+      </div>
+    </div>
+
+    <div class="main-content">
+      <header>
+        <h1>Admin Dashboard</h1>
+        <div class="admin-name">Welcome, Admin Jane Doe</div>
+      </header>
+
+      <div id="dashboard" class="card-grid">
+        <div class="card" onclick="showPage('appointments')">
+          <i class="fas fa-calendar-check"></i>
+          <h3>Appointments</h3>
+          <p>10 upcoming appointments</p>
+        </div>
+        <div class="card" onclick="showPage('users')">
+          <i class="fas fa-users"></i>
+          <h3>Clients</h3>
+          <p>150 registered patients</p>
+        </div>
+        <div class="card" onclick="showPage('inventory')">
+          <i class="fas fa-boxes"></i>
+          <h3>Inventory</h3>
+          <p>25 items low in stock</p>
+        </div>
+        <div class="card" onclick="showPage('billing')">
+          <i class="fas fa-file-invoice-dollar"></i>
+          <h3>Billing</h3>
+          <p>5 pending payments</p>
+        </div>
+        <div class="card" onclick="showPage('reports')">
+          <i class="fas fa-chart-line"></i>
+          <h3>Reports</h3>
+          <p>Last report generated: May 17</p>
+        </div>
+        <div class="card" onclick="showPage('settings')">
+          <i class="fas fa-cog"></i>
+          <h3>Settings</h3>
+          <p>System running smoothly</p>
+        </div>
+      </div>
+
+      <!-- Subpages -->
+      <div id="appointments" class="hidden">
+        <h2>Appointments</h2>
+        <p>This is the appointments page.</p>
+      </div>
+
+      <div id="users" class="hidden">
+        <h2>User Management</h2>
+        <p>This is the user management page.</p>
+      </div>
+
+      <div id="inventory" class="hidden">
+        <h2>Inventory</h2>
+        <p>This is the inventory page.</p>
+      </div>
+
+      <div id="billing" class="hidden">
+        <h2>Billing</h2>
+        <p>This is the billing page.</p>
+      </div>
+
+      <div id="reports" class="hidden">
+        <h2>Reports</h2>
+        <p>This is the reports page.</p>
+      </div>
+
+      <div id="settings" class="hidden">
+        <h2>Settings</h2>
+        <p>This is the settings page.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Dental Care Management System. All rights reserved.
+  </footer>
+
+  <script>
+    function showPage(pageId) {
+      const pages = document.querySelectorAll('.main-content > div');
+      pages.forEach(page => page.classList.add('hidden'));
+      document.getElementById(pageId).classList.remove('hidden');
+    }
+
+    function logout() {
+      window.location.href = '../index.html';
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dental Receptionist Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background: #F0F9FF;
+    }
+
+    .content-wrapper {
+      display: flex;
+      flex: 1;
+    }
+
+    .sidebar {
+      width: 220px;
+      background-color: #1E293B;
+      color: #BFDBFE;
+      padding: 20px 0;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .sidebar h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #3B82F6;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    .sidebar ul {
+      list-style: none;
+    }
+
+    .sidebar ul li {
+      padding: 15px 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      color: #BFDBFE;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .sidebar ul li:hover {
+      background-color: #334155;
+      color: #60A5FA;
+    }
+
+    .sidebar ul li i {
+      margin-right: 10px;
+      color: #60A5FA;
+    }
+
+    .logout {
+      padding: 15px 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      color: #F87171;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      margin-top: auto;
+      border-top: 1px solid #334155;
+    }
+
+    .logout:hover {
+      background-color: #B91C1C;
+      color: #FECACA;
+    }
+
+    .logout i {
+      margin-right: 10px;
+      color: #F87171;
+    }
+
+    .main-content {
+      flex-grow: 1;
+      padding: 20px;
+      background: white;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    header h1 {
+      font-size: 24px;
+      color: #2563EB;
+      font-weight: 700;
+    }
+
+    .receptionist-name {
+      font-size: 16px;
+      color: #4B5563;
+      font-weight: 500;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.15);
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(37, 99, 235, 0.3);
+    }
+
+    .card i {
+      font-size: 28px;
+      margin-bottom: 10px;
+      color: #2563EB;
+    }
+
+    .card h3 {
+      margin: 10px 0 5px;
+      font-size: 18px;
+      color: #1E293B;
+      font-weight: 600;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: #4B5563;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    footer {
+      background-color: #1E293B;
+      color: white;
+      text-align: center;
+      padding: 10px 0;
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    /* Extra styling for search input */
+    .search-box {
+      margin-bottom: 20px;
+    }
+
+    .search-box input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #CBD5E1;
+      font-size: 16px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="content-wrapper">
+    <div class="sidebar">
+      <div>
+        <h2>DENTAL CARE</h2>
+        <ul>
+          <li onclick="showPage('dashboard')"><i class="fas fa-home"></i> Dashboard</li>
+          <li onclick="showPage('manageAppointments')"><i class="fas fa-calendar-check"></i> Manage Appointments</li>
+          <li onclick="showPage('patientSearch')"><i class="fas fa-search"></i> Patient Search</li>
+          <li onclick="showPage('notifications')"><i class="fas fa-bell"></i> Notifications</li>
+          <li onclick="showPage('profile')"><i class="fas fa-user"></i> Profile</li>
+        </ul>
+      </div>
+      <div class="logout" onclick="logout()">
+        <i class="fas fa-power-off"></i> Logout
+      </div>
+    </div>
+
+    <div class="main-content">
+      <header>
+        <h1>Receptionist Dashboard</h1>
+        <div class="receptionist-name">Welcome, Maria Garcia</div>
+      </header>
+
+      <div id="dashboard" class="card-grid">
+        <div class="card" onclick="showPage('manageAppointments')">
+          <i class="fas fa-calendar-day"></i>
+          <h3>Today's Appointments</h3>
+          <p>8 appointments scheduled</p>
+        </div>
+        <div class="card" onclick="showPage('patientSearch')">
+          <i class="fas fa-user-search"></i>
+          <h3>Patient Search</h3>
+          <p>Find patient details quickly</p>
+        </div>
+        <div class="card" onclick="showPage('notifications')">
+          <i class="fas fa-bell"></i>
+          <h3>Notifications</h3>
+          <p>3 new alerts</p>
+        </div>
+        <div class="card" onclick="showPage('profile')">
+          <i class="fas fa-user"></i>
+          <h3>Profile</h3>
+          <p>Manage your account</p>
+        </div>
+      </div>
+
+      <!-- Subpages -->
+      <div id="manageAppointments" class="hidden">
+        <h2>Manage Appointments</h2>
+        <p>Schedule, reschedule, or cancel appointments.</p>
+      </div>
+
+      <div id="patientSearch" class="hidden">
+        <h2>Patient Search</h2>
+        <div class="search-box">
+          <input type="text" placeholder="Search patients by name or ID..." />
+        </div>
+        <p>Results will be displayed here.</p>
+      </div>
+
+      <div id="notifications" class="hidden">
+        <h2>Notifications</h2>
+        <p>View important alerts and reminders.</p>
+      </div>
+
+      <div id="profile" class="hidden">
+        <h2>Profile</h2>
+        <p>Update your personal information and settings.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Dental Care Management System. All rights reserved.
+  </footer>
+
+  <script>
+    function showPage(pageId) {
+      const pages = document.querySelectorAll('.main-content > div');
+      pages.forEach(page => page.classList.add('hidden'));
+      document.getElementById(pageId).classList.remove('hidden');
+    }
+
+    function logout() {
+      window.location.href = '../index.html';
+    }
+  </script>
+</body>
+
+</html>
