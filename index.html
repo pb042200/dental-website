@@ -185,8 +185,20 @@
 }
 
 function login() {
-alert('This is a dummy login function.');
+const username = document.getElementById('authUsername').value.trim();
+  const password = document.getElementById('authPassword').value.trim();
+
+  if (username === 'admin' && password === '123') {
+    window.location.href = 'admin/index.html';
+  } else if (username === 'user' && password === '123') {
+    window.location.href = 'patient/index.html';
+  } else if (username === 'recep' && password === '123') {
+    window.location.href = 'receptionist/index.html';
+  } else {
+    alert('Invalid username or password.');
+  }
 }
+
 
 // Appointment modal logic
 
